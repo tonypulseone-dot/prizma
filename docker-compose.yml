@@ -1,0 +1,28 @@
+name: prizma
+
+# Runs next to the stack in /opt/sleep_dairy without publishing any ports.
+# Caddy from that stack reaches this service as http://prizma:3000 over the shared network.
+services:
+  prizma:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:?set NEXT_PUBLIC_SITE_URL in .env}
+    image: prizma-audit:latest
+    container_name: prizma
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      AUDIT_DATA_DIR: /data/audits
+      AUDIT_ALLOW_PRIVATE_HOSTS: "0"
+    volumes:
+      - prizma-data:/data
+    mem_limit: 768m
+
+volumes:
+  prizma-data:
+
+networks:
+  default:
+    name: sleep_dairy_default
+    external: true

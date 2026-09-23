@@ -1,0 +1,10 @@
+node_modules
+.next
+.data
+*.tsbuildinfo
+.env*.local
+test
+Dockerfile
+docker-compose.yml
+docs
+.git
