@@ -1,8 +1,21 @@
-# Призма — SEO + GEO аудит сайта
+# SEOneiro — SEO + GEO аудит сайта
 
 Лендинг в стиле «жидкое стекло» и рабочий сервис аудита: вводите адрес сайта, через 1–2 минуты получаете отчёт по постоянной ссылке.
 
-## Запуск
+## Посмотреть у себя на компьютере
+
+Самый простой способ — через Docker Desktop (Windows, Mac, Linux):
+
+```bash
+git clone git@github.com:tonypulseone-dot/prizma.git && cd prizma
+docker compose -f docker-compose.local.yml up --build
+```
+
+Через 1–2 минуты откройте http://localhost:3000 и проверьте любой сайт. Остановить: Ctrl+C.
+
+Без Docker, если стоит Node.js 20.9+: `npm install && npm run dev`, затем http://localhost:3000.
+
+## Запуск для разработки
 
 ```bash
 npm install

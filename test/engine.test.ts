@@ -2,7 +2,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { runChecks, REGISTRY } from "@/lib/audit/checks";
 import { buildContext } from "@/lib/audit/crawl";
 import { extractKeywords } from "@/lib/audit/keywords";
-import { isAllowed, parseRobots } from "@/lib/audit/robots";
+import { blocksOurBot, isAllowed, parseRobots } from "@/lib/audit/robots";
 import { scoreResults, summarizePages } from "@/lib/audit/score";
 import type { CheckResult, SiteContext } from "@/lib/audit/types";
 import { InputError, normalizeInputUrl } from "@/lib/audit/url";
@@ -36,6 +36,11 @@ describe("robots.txt", () => {
     expect(isAllowed(r, "Googlebot", "/admin/x")).toBe(false);
     expect(isAllowed(r, "Googlebot", "/admin/public/page")).toBe(true);
     expect(isAllowed(r, "GPTBot", "/")).toBe(false);
+  });
+  it("stops only when our bot is disallowed by name", () => {
+    expect(blocksOurBot(parseRobots("User-agent: SeoneiroBot\nDisallow: /\n", 200, "text/plain"))).toBe(true);
+    expect(blocksOurBot(parseRobots("User-agent: *\nDisallow: /\n", 200, "text/plain"))).toBe(false);
+    expect(blocksOurBot(r)).toBe(false);
   });
 });
 

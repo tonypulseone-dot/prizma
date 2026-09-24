@@ -4,7 +4,19 @@ import { Effects } from "@/components/Effects";
 import { DemoDashboard } from "@/components/landing/DemoDashboard";
 import { CATEGORIES } from "@/lib/audit/categories";
 import { CHECK_COUNT, REGISTRY } from "@/lib/audit/checks";
+import type { Metadata } from "next";
 import { siteUrl } from "@/lib/site";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: {
+    url: "/",
+    type: "website",
+    locale: "ru_RU",
+    siteName: "SEOneiro",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "SEOneiro — SEO и GEO аудит сайта" }],
+  },
+};
 
 const perCategory = (key: string) => REGISTRY.filter((c) => c.category === key).length;
 
@@ -43,13 +55,13 @@ function JsonLd() {
   const data = {
     "@context": "https://schema.org",
     "@graph": [
-      { "@type": "Organization", name: "Призма", url, logo: `${url}/icon.svg` },
-      { "@type": "WebSite", name: "Призма", url, inLanguage: "ru" },
+      { "@type": "Organization", name: "SEOneiro", url, logo: `${url}/icon.svg` },
+      { "@type": "WebSite", name: "SEOneiro", url, inLanguage: "ru" },
       {
         "@type": "Service",
         name: "SEO и GEO аудит сайта",
         serviceType: "SEO-аудит",
-        provider: { "@type": "Organization", name: "Призма" },
+        provider: { "@type": "Organization", name: "SEOneiro" },
         areaServed: "RU",
         offers: [
           { "@type": "Offer", name: "Бесплатный аудит", price: "0", priceCurrency: "RUB" },
@@ -119,7 +131,7 @@ export default function Home() {
           <section className="rise">
             <div className="bento" data-play>
               <div className="tile glass first">
-                <h3>Отчёт строится по фактическим данным вашего сайта, а не по шаблону</h3>
+                <p className="tile-title">Отчёт строится по фактическим данным вашего сайта, а не по шаблону</p>
                 <p>Отчёт открывается по ссылке, его можно сразу переслать разработчику.</p>
               </div>
               <div className="tile glass">
@@ -344,12 +356,12 @@ export default function Home() {
               </span>
               <h2 className="h2">Агентство, автопродвижение и мы</h2>
             </div>
-            <div className="cmp glass rise">
+            <div className="cmp table-scroll glass rise">
               <table>
                 <thead>
                   <tr>
                     <th>Параметр</th>
-                    <th className="us">Призма</th>
+                    <th className="us">SEOneiro</th>
                     <th>SEO-агентство</th>
                     <th>Автопродвижение</th>
                   </tr>

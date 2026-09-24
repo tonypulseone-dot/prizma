@@ -1,0 +1,19 @@
+# Local preview: docker compose -f docker-compose.local.yml up --build
+# then open http://localhost:3000
+name: seoneiro-local
+services:
+  prizma:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SITE_URL: http://localhost:3000
+    image: prizma-audit:local
+    ports:
+      - "3000:3000"
+    environment:
+      AUDIT_DATA_DIR: /data/audits
+    volumes:
+      - seoneiro-local-data:/data
+
+volumes:
+  seoneiro-local-data:

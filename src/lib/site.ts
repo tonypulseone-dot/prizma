@@ -1,4 +1,5 @@
-export const SITE_NAME = "Призма";
+export const SITE_NAME = "SEOneiro";
+export const SITE_DOMAIN = "seoneiro.ru";
 
 /** Public base URL: env first, then the request's own origin. */
 export function siteUrl(req?: Request): string {

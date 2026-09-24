@@ -1,5 +1,13 @@
 import type { RobotsGroup, RobotsInfo } from "./types";
 
+export const OUR_BOT = "SeoneiroBot";
+
+/** True when the site owner closed the whole site to our crawler by name (not just to all robots). */
+export function blocksOurBot(info: RobotsInfo): boolean {
+  const named = info.groups.some((g) => g.agents.some((a) => a.includes(OUR_BOT.toLowerCase())));
+  return named && !isAllowed(info, OUR_BOT, "/");
+}
+
 export const AI_BOTS = [
   "GPTBot",
   "OAI-SearchBot",

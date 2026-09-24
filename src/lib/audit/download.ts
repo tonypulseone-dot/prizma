@@ -28,7 +28,7 @@ export function renderReportHtml(v: ReportView, siteUrl: string): string {
 
   return `<!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Отчёт по сайту ${esc(v.host)} — Призма</title>
+<title>Отчёт по сайту ${esc(v.host)} — SEOneiro</title>
 <style>
 :root{--ink:#14142b;--mid:#5b5b78;--line:#e4e4f0;--violet:#7b5cff;--soft:#f5f3ff;--good:#12855c;--warn:#a86806;--bad:#c42a4b}
 *{box-sizing:border-box}body{margin:0;padding:32px 20px 64px;background:#fff;color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
@@ -45,7 +45,7 @@ ol.steps{padding-left:20px}ol.steps li{margin-bottom:12px}ol.steps ul{margin:6px
 pre{white-space:pre-wrap;background:#f7f7fb;border-radius:8px;padding:10px;font-size:13px}
 @media print{body{padding:0}.hero{break-inside:avoid}}
 </style></head><body><div class="wrap">
-<p class="muted">Призма · SEO и GEO аудит</p>
+<p class="muted">SEOneiro · SEO и GEO аудит</p>
 <h1>Отчёт по сайту ${esc(v.url)}</h1>
 <p class="muted">Проверка от ${esc(fmtDate(v.createdAt))} (МСК) · онлайн-версия: <a href="${esc(online)}">${esc(online)}</a></p>
 <div class="hero"><div class="score">${v.score}<small> из 100</small><div style="font-size:16px;font-weight:600;margin-top:6px">${esc(v.verdict.title)}</div></div>

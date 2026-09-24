@@ -19,9 +19,11 @@ export function Nav({ home = true }: { home?: boolean }) {
   const h = (hash: string) => (home ? hash : `/${hash}`);
   return (
     <header className="nav glass">
-      <Link className="logo" href="/">
+      <Link className="logo" href="/" aria-label="SEOneiro, на главную">
         <i aria-hidden="true" />
-        Призма
+        <span>
+          SEO<b className="iris-text">neiro</b>
+        </span>
       </Link>
       <nav className="links" aria-label="Разделы">
         <a href={h("#report")}>Отчёт</a>
@@ -44,7 +46,9 @@ export function Footer() {
       <div style={{ display: "flex", flexDirection: "column", gap: 10, maxWidth: 320 }}>
         <span className="logo">
           <i aria-hidden="true" />
-          Призма
+          <span>
+            SEO<b className="iris-text">neiro</b>
+          </span>
         </span>
         <span>Проверяем сайт и показываем, что чинить, чтобы вас находили в Яндексе, Google и ответах нейросетей.</span>
       </div>
@@ -62,15 +66,16 @@ export function Footer() {
         </div>
         <div>
           <b>Документы</b>
-          <span>Оферта</span>
-          <span>Политика обработки ПДн</span>
-          <span>Cookie</span>
+          <a href="/offer">Оферта</a>
+          <a href="/privacy">Политика обработки ПДн</a>
+          <a href="/cookies">Cookie</a>
+          <a href="/bot">Наш робот SeoneiroBot</a>
         </div>
       </div>
       <div className="wordmark" aria-hidden="true">
-        Призма
+        SEOneiro
       </div>
-      <div className="legal">© {new Date().getFullYear()} Призма · рабочее название</div>
+      <div className="legal">© {new Date().getFullYear()} SEOneiro · seoneiro.ru</div>
     </footer>
   );
 }

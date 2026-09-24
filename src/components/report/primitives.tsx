@@ -116,7 +116,7 @@ const shorten = (url: string) => {
 
 export function PagesTable({ pages }: { pages: PageSummary[] }) {
   return (
-    <div className="pages-table">
+    <div className="pages-table table-scroll">
       <table>
         <thead>
           <tr>

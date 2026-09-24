@@ -1,6 +1,6 @@
 import { fetchFollow, fetchOnce, limiter, probeAsset } from "./http";
 import { parsePage } from "./parse";
-import { isAllowed, parseRobots } from "./robots";
+import { blocksOurBot, isAllowed, OUR_BOT, parseRobots } from "./robots";
 import { loadSitemap } from "./sitemap";
 import type { AssetInfo, PageData, SiteContext } from "./types";
 import { sameSite, stripWww } from "./url";
@@ -40,12 +40,13 @@ export async function buildContext(inputUrl: string, onProgress: ProgressFn, max
   await onProgress({ step: "Читаем robots.txt", percent: 8, pagesCrawled: 0, pagesPlanned: maxPages });
   const robotsChain = await fetchFollow(new URL("/robots.txt", origin).toString(), 5);
   const robots = parseRobots(robotsChain.final.body, robotsChain.final.status, robotsChain.final.contentType);
+  if (blocksOurBot(robots)) throw new AuditError(`Владелец сайта запретил проверку роботу ${OUR_BOT} в robots.txt.`);
 
   const altHost = host.startsWith("www.") ? stripWww(host) : `www.${host}`;
   const [httpProbe, altHostProbe, notFound, faviconProbe, sitemap] = await Promise.all([
     finalUrl.protocol === "https:" ? fetchFollow(`http://${finalUrl.host}/`, 6) : Promise.resolve(null),
     fetchFollow(`${finalUrl.protocol}//${altHost}${finalUrl.port ? ":" + finalUrl.port : ""}/`, 6).then((c) => (c.final.status === 0 ? null : c)),
-    fetchOnce(new URL(`/prizma-check-${Math.random().toString(36).slice(2, 10)}-404`, origin).toString()),
+    fetchOnce(new URL(`/seoneiro-check-${Math.random().toString(36).slice(2, 10)}-404`, origin).toString()),
     fetchOnce(new URL("/favicon.ico", origin).toString(), { method: "HEAD" }),
     loadSitemap(origin, robots.sitemaps),
   ]);
@@ -69,7 +70,7 @@ export async function buildContext(inputUrl: string, onProgress: ProgressFn, max
     if (seen.has(key)) return;
     const u = new URL(key);
     if (u.hostname !== host || FILE_EXT.test(u.pathname)) return;
-    if (!isAllowed(robots, "PrizmaAuditBot", u.pathname + u.search)) return;
+    if (!isAllowed(robots, OUR_BOT, u.pathname + u.search)) return;
     seen.add(key);
     (fromSitemap ? sitemapQueue : linkQueue).push(key);
   };

@@ -4,7 +4,7 @@ import type { AssetInfo, HttpResponse, RedirectChain } from "./types";
 import { allowPrivate, assertPublicHost, isPrivateIp } from "./url";
 
 export const USER_AGENT =
-  "Mozilla/5.0 (compatible; PrizmaAuditBot/1.0; +https://prizma.example/bot)";
+  "Mozilla/5.0 (compatible; SeoneiroBot/1.0; +https://seoneiro.ru/bot)" as const;
 
 const DEFAULT_TIMEOUT = 15000;
 

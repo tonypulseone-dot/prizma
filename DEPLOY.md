@@ -1,6 +1,6 @@
-# Выкладка на сервер 91.218.244.185 (рядом со stillup.ru)
+# Выкладка SEOneiro на сервер 91.218.244.185 (рядом со stillup.ru)
 
-Сервис — один контейнер `prizma` в общей сети `sleep_dairy_default`, наружу портов не открывает,
+Сервис SEOneiro (seoneiro.ru) — один контейнер `prizma` в общей сети `sleep_dairy_default`, наружу портов не открывает,
 слушает `3000`. Caddy из `/opt/sleep_dairy` проксирует на него домен из `/opt/caddy-sites/prizma.caddy`
 и сам выпускает сертификат. Базы нет: отчёты лежат JSON-файлами в томе `prizma_prizma-data`.
 
